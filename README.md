@@ -1,10 +1,13 @@
 # Nombre de Proyecto:
+
 Recipfy
+
 ## Integrantes:
-* David Vieira
-* Diana Sepulveda
-* David Velasquez
-* Juan Pablo Garcia 
+
+- David Vieira
+- Diana Sepulveda
+- David Velasquez
+- Juan Pablo Garcia
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
