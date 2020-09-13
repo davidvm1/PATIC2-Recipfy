@@ -12,6 +12,7 @@
 
     <v-btn class="mr-4"
            color="white"
+           @click="$router.push({path: '/Login'})"
            text>
       Iniciar Sesión
     </v-btn>
