@@ -7,6 +7,7 @@
         outlined
         label="Nombre"
         v-model="name"
+        rounded
         required
       ></v-text-field>
 
@@ -15,6 +16,7 @@
         outlined
         label="Apellido"
         v-model="lastname"
+        rounded
         required
       ></v-text-field>
 
@@ -24,6 +26,7 @@
         type="email"
         label="Correo"
         v-model="email"
+        rounded
         required
       ></v-text-field>
 
@@ -35,6 +38,7 @@
         class="input-group--focused"
         type="password"
         v-model="password"
+        rounded
         @click:append="show3 = !show3"
       ></v-text-field>
 
@@ -42,9 +46,10 @@
         append-icon="mdi-lock-question"
         outlined
         name="input-10-2"
-        label="Respite la contraseña"
+        label="Repite la contraseña"
         class="input-group--focused"
         type="password"
+        rounded
         @click:append="show3 = !show3"
       ></v-text-field>
 
@@ -68,6 +73,7 @@
 <script>
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Signup",
@@ -86,7 +92,8 @@ export default {
         const user = await firebase
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password);
-        console.log(user);
+
+        this.changeSessionState(true);
         this.$router.replace({
           name: "Secret",
         });
@@ -94,6 +101,10 @@ export default {
         console.log(err);
       }
     },
+    ...mapMutations(["changeSessionState"]),
+  },
+  computed: {
+    ...mapState(["isLogged"]),
   },
 };
 </script>
