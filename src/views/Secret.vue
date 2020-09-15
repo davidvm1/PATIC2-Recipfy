@@ -1,11 +1,11 @@
 <template>
-  <div>Secret</div>
+  <div>Te has registrado correctamente</div>
 </template>
 
 <script>
 export default {
   name: "Secret",
-};
+}
 </script>
 
 <style>
