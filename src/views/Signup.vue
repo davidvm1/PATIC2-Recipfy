@@ -70,6 +70,7 @@
     </v-form>
   </v-card>
 </template>
+
 <script>
 import * as firebase from "firebase/app";
 import "firebase/auth";
