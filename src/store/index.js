@@ -8,8 +8,8 @@ export default new Vuex.Store({
     isLogged: false,
   },
   mutations: {
-    changeSessionState (state, value) {
-      state.isLogged = value;
+    CHANGE_SESSION_STATE (state, value) {
+      state.isLogged = value
     }
   },
   actions: {

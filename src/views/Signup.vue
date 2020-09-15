@@ -1,24 +1,27 @@
 <template>
   <v-card min-width="500" class="mx-auto mt-13 mb-13 pa-13">
     <v-card-title class="title">Crear una Cuenta</v-card-title>
-    <v-form class="text-center" ref="form" @submit.prevent="pressed">
+    <v-form class="text-center"
+            ref="SignInForm">
       <v-text-field
         append-icon="mdi-account-circle-outline"
         outlined
         label="Nombre"
         v-model="name"
         rounded
-        required
-      ></v-text-field>
+        :rules="[rules.required]"
+        required>
+      </v-text-field>
 
       <v-text-field
         append-icon="mdi-account-circle-outline"
         outlined
         label="Apellido"
-        v-model="lastname"
+        v-model="lastName"
         rounded
-        required
-      ></v-text-field>
+        :rules="[rules.required]"
+        required>
+      </v-text-field>
 
       <v-text-field
         append-icon="mdi-email-multiple-outline"
@@ -27,8 +30,9 @@
         label="Correo"
         v-model="email"
         rounded
-        required
-      ></v-text-field>
+        :rules="[rules.email, rules.required]"
+        required>
+      </v-text-field>
 
       <v-text-field
         append-icon="mdi-lock-question"
@@ -39,8 +43,9 @@
         type="password"
         v-model="password"
         rounded
-        @click:append="show3 = !show3"
-      ></v-text-field>
+        :rules="[rules.required, rules.min8]"
+        @click:append="show3 = !show3">
+      </v-text-field>
 
       <v-text-field
         append-icon="mdi-lock-question"
@@ -50,11 +55,15 @@
         class="input-group--focused"
         type="password"
         rounded
-        @click:append="show3 = !show3"
-      ></v-text-field>
+        :rules="[rules.required, rules.min8]"
+        @click:append="show3 = !show3">
+      </v-text-field>
 
       <v-radio-group>
-        <v-radio color="#00575A" label="Estoy de acuerdo con los Términos de Uso" value="radio-1"></v-radio>
+        <v-radio color="#00575A"
+                 label="Estoy de acuerdo con los Términos de Uso"
+                 v-model="this.terms"
+                 value="radio-1" />
       </v-radio-group>
 
       <v-btn
@@ -63,48 +72,55 @@
         min-height="40px"
         class="signup-btn mt-5"
         color="#00575A"
-        type="submit"
-      >Crear cuenta</v-btn>
+        @click="pressed">
+        Crear cuenta
+      </v-btn>
 
-      <v-alert class="mt-5" type="error" v-if="error">{{error.message}}</v-alert>
+      <v-alert class="mt-5"
+               type="error"
+               v-if="error">
+        {{error.message}}
+      </v-alert>
     </v-form>
   </v-card>
 </template>
 <script>
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import { mapState, mapMutations } from "vuex";
+import rules from '@/libs/rules'
+import { mapState } from "vuex";
+import firebaseService from '@/services/firebaseServices'
 
 export default {
   name: "Signup",
+  computed: {
+    ...mapState(["isLogged"]),
+  },
   data() {
     return {
-      name: "",
-      lastname: "",
       email: "",
+      name: "",
+      lastName: "",
       password: "",
       error: "",
+      rules: rules,
+      terms: false
     };
   },
   methods: {
     async pressed() {
+      if (!this.$refs.SignInForm.validate()) return
       try {
-        const user = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password);
-
-        this.changeSessionState(true);
+        const user = await firebaseService.createUser(this.email, this.password)
+        this.$store.commit('CHANGE_SESSION_STATE', false)
+        if (!user || !user.user) {
+          return
+        }
         this.$router.replace({
           name: "Secret",
-        });
+        })
       } catch (err) {
-        console.log(err);
+        this.error = err
       }
-    },
-    ...mapMutations(["changeSessionState"]),
-  },
-  computed: {
-    ...mapState(["isLogged"]),
+    }
   },
 };
 </script>
