@@ -9,22 +9,35 @@
     </v-toolbar-title>
 
     <v-spacer />
-    <v-btn class="mr-4"
-           color="white"
-           @click="$router.push({path: '/Login'})"
-           text>
-      Iniciar Sesión
-    </v-btn>
-    <span class="mr-4"
-          style="color: white;">
-    </span>
 
     <v-btn class="mr-4"
            color="white"
-           @click="$router.push({path: '/Signup'})"
-           text>
-      Registrarse
-    </v-btn>
+           text v-if="isLogged"
+           @click="logOut">Salir</v-btn>
+
+    <v-container v-else>
+      <v-row justify="end">
+        <v-btn class="mr-4"
+               color="white"
+               @click="$router.push({path: '/Login'})"
+               text>
+          Iniciar Sesión
+        </v-btn>
+
+        <span class="mr-4"
+              style="color: white;">
+          |
+        </span>
+
+        <v-btn class="mr-4"
+               color="white"
+               @click="$router.push({path: '/Signup'})"
+               text>
+          Registrarse
+        </v-btn>
+
+      </v-row>
+    </v-container>
   </v-app-bar>
 </template>
 <script>
@@ -40,7 +53,7 @@ export default {
     logOut() {
       this.$store.commit('CHANGE_SESSION_STATE', false)
       this.$router.replace({
-        name: "Signup",
+        name: "Login",
       })
     },
   },
