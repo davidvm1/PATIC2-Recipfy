@@ -44,7 +44,7 @@
     </v-btn>
 
     <v-card-text
-        > 
+        >
         ¿Olvidaste la contraseña?
     </v-card-text>
 
