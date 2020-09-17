@@ -12,14 +12,16 @@
 
     <v-btn class="mr-4"
            color="white"
-           text v-if="isLogged"
-           @click="logOut">Salir</v-btn>
+           text
+           v-if="isLogged"
+           @click="logOut">Salir
+    </v-btn>
 
     <v-container v-else>
       <v-row justify="end">
         <v-btn class="mr-4"
                color="white"
-               @click="$router.push({path: '/Login'})"
+               @click="$router.push({path: '/'})"
                text>
           Iniciar Sesión
         </v-btn>
