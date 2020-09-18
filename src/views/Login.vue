@@ -52,7 +52,7 @@
     <v-btn 
     text 
     color="#00575A"
-    @click="rememberPass()">
+    @click="rememberPass">
     ¿Olvidaste la contraseña?
     </v-btn>
 
@@ -102,6 +102,23 @@ import firebaseService from '@/services/firebaseServices'
           this.error="Debes ingresar todos los campos"
         }
 
+      },
+        async rememberPass (){
+        //Aqui se pone el metodo
+        if(this.email){
+           try {
+            const user = await firebaseService.rememberPass(this.email)
+            this.error="Acabamos de enviar un mensaje a tu correo electronico para que recuperes tu cuenta"
+            this.email=""
+            if (!user || !user.user) {
+              return
+            } 
+          } catch (err) {
+            this.error = err
+          }
+        }else{
+          this.error="Ingresa tu correo para recuperar tu contraseña"
+        }
       }
     }
   }

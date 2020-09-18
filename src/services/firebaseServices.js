@@ -23,5 +23,13 @@ firebaseService.Sign = async (email, password) => {
     throw new Error(err.message)
   }
 }
+firebaseService.rememberPass = async(email)=>{
+  try{
+    const user = await firebase.auth().sendPasswordResetEmail(email)
+    return user
+  }catch(err){
+    throw new Error(err.message)
+  }
+}
 
 export default firebaseService
