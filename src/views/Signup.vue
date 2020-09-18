@@ -116,7 +116,7 @@ export default {
           return
         }
         this.$router.replace({
-          name: "Secret",
+          name: "Search",
         })
       } catch (err) {
         this.error = err

@@ -24,6 +24,11 @@ const routes = [
     name: 'Secret',
     component: () => import(/* webpackChunkName: "secret" */ '../views/Secret.vue')
   },
+  {
+    path: '/search',
+    name: 'Search',
+    component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
+  },
 ]
 
 const router = new VueRouter({
