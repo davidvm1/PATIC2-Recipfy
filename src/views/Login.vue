@@ -6,23 +6,28 @@
     </v-card-title>
     <v-form
         class="text-center"
-        ref="form">
-
+         ref="SignInForm">
       <v-text-field
         append-icon="mdi-email-multiple-outline"
         outlined
+        rounded
         type="email"
-        label="Correo"
+        label="Correo electrónico"
+        :rules="[rules.required,rules.email]"
+        v-model="email"
         required>
       </v-text-field>
 
       <v-text-field
         append-icon="mdi-lock-question"
         outlined
+        rounded
         name="input-10-2"
         label="Contraseña"
         class="input-group--focused"
         type="password"
+        :rules="[rules.required]"
+        v-model="password"
         @click:append="show3 = !show3">
     </v-text-field>
 
@@ -39,23 +44,63 @@
         min-width="40%"
         min-height="40px"
         class="signup-btn mt-5"
-        color="#00575A">
+        color="#00575A"
+        @click="pressed">
         Ingresar
     </v-btn>
 
-    <v-card-text
-        >
-        ¿Olvidaste la contraseña?
-    </v-card-text>
+    <v-btn 
+    text 
+    color="#00575A"
+    @click="rememberPass()">
+    ¿Olvidaste la contraseña?
+    </v-btn>
 
-      </v-form>
+    <v-alert class="mt-5"
+        type="error"
+        v-if="error">
+        {{error}}
+      </v-alert>
+    </v-form>
   </v-card>
 </template>
 <script>
+import rules from '@/libs/rules'
+import { mapState } from "vuex";
+import firebaseService from '@/services/firebaseServices'
   export default {
-    name: 'Navbar',
+    name: 'Login',
+    computed: {
+       ...mapState(["isLogged"]),
+    },
     data () {
       return {
+        email: "",
+        password:"",
+        rules: rules,
+        error: ""
+      }
+    },
+    methods:{
+      async pressed(){
+        if (this.email && this.password){
+          //Se puede iniciar sesión
+          try {
+            const user = await firebaseService.Sign(this.email, this.password)
+            this.$store.commit('CHANGE_SESSION_STATE', true)
+            //console.log("Si se loguea!!")
+            this.$router.replace({
+            name: "Secret",
+            })
+            if (!user || !user.user) {
+              return
+            } 
+          } catch (err) {
+            this.error = err
+          }
+        }else{
+          this.error="Debes ingresar todos los campos"
+        }
 
       }
     }

@@ -13,5 +13,15 @@ firebaseService.createUser = async (email, password) => {
     throw new Error(err.message)
   }
 }
+firebaseService.Sign = async (email, password) => {
+  try {
+    const user = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+    return user
+  } catch (err) {
+    throw new Error(err.message)
+  }
+}
 
 export default firebaseService

@@ -1,5 +1,5 @@
 <template>
-  <div>Te has registrado correctamente</div>
+  <div>BIENVENIDO A RECIPFY</div>
 </template>
 
 <script>
