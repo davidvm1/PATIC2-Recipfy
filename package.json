@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
-    "firebase": "^7.20.0",
+    "firebase": "^7.21.0",
     "material-design-icons-iconfont": "^5.0.1",
     "roboto-fontface": "*",
     "vue": "^2.6.11",
