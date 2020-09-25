@@ -14,13 +14,14 @@
       </v-card>
     </v-row>
 
-    <v-row align="center" justify="center">
+    <v-row align="center" justify="center" class="mt-3">
       <v-col cols="5" lg="2">
         <div justify="end" align-content-center>
           <v-icon>mdi-alarm</v-icon>
           30 minutos
         </div>
       </v-col>
+      <v-divider vertical></v-divider>
       <v-col cols="5" lg="1">
         <v-avatar>
           <img src="../assets/Carla.jpg" alt="Carla García" />
@@ -30,40 +31,35 @@
         <div class="justify-center">Carla García</div>
       </v-col>
     </v-row>
-
+    <v-divider class="my-3" inset></v-divider>
     <v-row class="margin">
       <v-card elevation="0">
         <v-card-title>Ingredientes</v-card-title>
         <v-list shaped>
-          <v-list-item-group multiple color="#006159">
-            <v-list-item v-for="(item, i) in items" :key="i">
-              <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
-                <v-divider></v-divider>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
+          <v-list-item v-for="(item, i) in items" :key="i">
+            <v-list-item-content>
+              <v-list-item-title v-text="item.text" class="space"></v-list-item-title>
+              <v-divider></v-divider>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-card>
     </v-row>
-
+    <v-divider inset class="my-2"></v-divider>
     <v-row class="margin">
       <v-card elevation="0">
         <v-card-title>Pasos</v-card-title>
         <v-list shaped>
-          <v-list-item-group multiple color="#006159">
-            <v-list-item v-for="(item2, j) in items2" :key="j">
-              <v-list-item-content>
-                <v-list-item-title v-text="items2.texto"></v-list-item-title>
-                <v-divider></v-divider>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
+          <v-list-item v-for="(item2, j) in items2" :key="j">
+            <v-list-item-content>
+              <v-list-item-title v-text="item2.text" class="space"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-card>
     </v-row>
-
-    <v-row justify="center">
+    <v-divider inset class="my-2"></v-divider>
+    <v-row justify="center" class="mt-5">
       <v-avatar size="100">
         <img src="../assets/Carla.jpg" alt="Carla García" />
       </v-avatar>
@@ -87,25 +83,27 @@ export default {
       { text: '1 cucharadita polvos de hornear' },
       { text: '1 pizca sal' },
       { text: '100 gramos harina' },
-      { text: 'Chispas de chocolate para decorar' }],
+      { text: 'Chispas de chocolate para decorar' }
+    ],
     item2: 1,
     items2: [
-      { texto: 'Mezclar la mantequilla con el azúcar hasta formar una crema sin grumos.' },
-      { texto: 'Añadir los huevos (ideal que estén a temperatura ambiente), batir hasta que este espumosa.' },
-      { texto: 'Añadir la vainilla y sal.' },
-      { texto: 'Agregar la avena, la harina y los polvos de hornear, revolver hasta formar una mezcla pegajosa.' },
-      { texto: 'Enmantequillar la lata del horno y poner círculos de la mezcla para galletas, procurar que queden separadas ya que en el horno se expanden, poner sobre cada galleta las chispas de chocolate a gusto.' },
-      { texto: 'Meter al horno por 15 minutos a 200 grados y ya están listas para disfrutar.' }
-    ],
+      { text: '1. Mezclar la mantequilla con el azúcar hasta formar una crema sin grumos.' },
+      { text: '2. Añadir los huevos (ideal que estén a temperatura ambiente), batir hasta que este espumosa.' },
+      { text: '3. Añadir la vainilla y sal.' },
+      { text: '4. Agregar la avena, la harina y los polvos de hornear, revolver hasta formar una mezcla pegajosa.' },
+      { text: '5. Enmantequillar la lata del horno y poner círculos de la mezcla para galletas, procurar que queden separadas ya que en el horno se expanden, poner sobre cada galleta las chispas de chocolate a gusto.' },
+      { text: '6. Meter al horno por 15 minutos a 200 grados y ya están listas para disfrutar.' }
+    ]
   })
-
-}
-
+};
 </script>
 
 <style scoped>
 .margin {
   margin-left: 150px;
   justify-content: flex-start;
+}
+.space {
+  white-space: normal;
 }
 </style>
