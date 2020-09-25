@@ -23,7 +23,7 @@
       </v-col>
       <v-divider vertical></v-divider>
       <v-col cols="5" lg="1">
-        <v-avatar>
+        <v-avatar class="ml-9">
           <img src="../assets/Carla.jpg" alt="Carla García" />
         </v-avatar>
       </v-col>
