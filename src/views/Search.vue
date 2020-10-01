@@ -88,9 +88,9 @@ export default {
       try {
         result = await this.$store.dispatch('getRecipes', this.ingredients)
         this.$store.commit('SET_RECIPES_STATE', result)
-        if(this.recipes.length === 0) {
+        if (this.recipes.length === 0) {
           this.error = 'No Recipes Found, Try Again!'
-        } else this.error = null
+        }else this.error = null
       } catch (e) {
           this.error = e
       }
