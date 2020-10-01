@@ -23,7 +23,6 @@
           </v-list-item>
         </template>
       </v-combobox>
-
     </v-row>
 
     <v-row justify="center">
@@ -33,24 +32,50 @@
         Buscar
       </v-btn>
     </v-row>
+    <v-row>
+      <v-card v-for="(item,index) in recipes"
+              :key="index"
+              cols ="4"
+              class="mx-auto"
+              style="margin: 10px"
+              width="350">
+        <v-img
+          class="black--text align-end"
+          height="200px"
+          :src="item.image">
+        </v-img>
+        <v-card-title>{{item.title}}</v-card-title>
+
+        <v-card-actions>
+          <v-btn
+            color="#00575A"
+            text>
+            See Details
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-row>
+
 
     <v-alert class="mt-5"
              type="error"
              v-if="error">
-      {{error.message}}
+      {{error}}
     </v-alert>
   </v-container>
 </template>
 
 <script>
-  import recipesService from '@/services/recipesServices'
+  import { mapState } from "vuex"
 export default {
+  computed: {
+    ...mapState(['recipes'])
+  },
   data() {
     return {
       chips: [],
       error: '',
-      ingredients: [],
-      recipes: []
+      ingredients: []
     }
   },
   methods: {
@@ -61,8 +86,11 @@ export default {
     async getRecipes () {
       let result
       try {
-        result = await recipesService.getRecipesByIngredients(this.ingredients)
-        console.log(result)
+        result = await this.$store.dispatch('getRecipes', this.ingredients)
+        this.$store.commit('SET_RECIPES_STATE', result)
+        if(this.recipes.length === 0) {
+          this.error = 'No Recipes Found, Try Again!'
+        } else this.error = null
       } catch (e) {
           this.error = e
       }
