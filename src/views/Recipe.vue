@@ -38,7 +38,7 @@
         <v-list shaped>
           <v-list-item v-for="(ingredients, i) in ingredients" :key="i">
             <v-list-item-content>
-              <v-list-item-title class="space" dark>{{i.id}}</v-list-item-title>
+              <v-list-item-title class="space" dark style="text-transform: capitalize;">{{i.name}}</v-list-item-title>
               <v-divider></v-divider>
             </v-list-item-content>
           </v-list-item>
@@ -50,9 +50,9 @@
       <v-card elevation="0">
         <v-card-title>Pasos</v-card-title>
         <v-list shaped>
-          <v-list-item v-for="(item2, j) in items2" :key="j">
+          <v-list-item v-for="(ingredients, j) in ingredients" :key="j">
             <v-list-item-content>
-              <v-list-item-title v-text="item2.text" class="space"></v-list-item-title>
+              <v-list-item-title class="space" style="text-transform: capitalize;">{{ingredients.original}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
