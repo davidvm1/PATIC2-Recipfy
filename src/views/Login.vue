@@ -90,7 +90,7 @@ import firebaseService from '@/services/firebaseServices'
             this.$store.commit('CHANGE_SESSION_STATE', true)
             //console.log("Si se loguea!!")
             this.$router.replace({
-            name: "Secret",
+            name: "Search",
             })
             if (!user || !user.user) {
               return
