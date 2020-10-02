@@ -73,7 +73,7 @@
 import { mapState } from "vuex"
 import recipesService from "@/services/recipesServices"
 export default {
-  
+
   name: 'Recipe',
   computed: {
     ...mapState(['recipes'])
