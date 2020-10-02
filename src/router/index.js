@@ -20,11 +20,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "signup" */ '../views/Login.vue')
   },
   {
-    path: '/secret',
-    name: 'Secret',
-    component: () => import(/* webpackChunkName: "secret" */ '../views/Secret.vue')
-  },
-  {
     path: '/search',
     name: 'Search',
     component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
