@@ -38,7 +38,7 @@
         <v-list shaped>
           <v-list-item v-for="(ingredients, i) in ingredients" :key="i">
             <v-list-item-content>
-              <v-list-item-title class="space" dark style="text-transform: capitalize;">{{i.name}}</v-list-item-title>
+              <v-list-item-title class="space" dark style="text-transform: capitalize;">{{ingredients.name}}</v-list-item-title>
               <v-divider></v-divider>
             </v-list-item-content>
           </v-list-item>
