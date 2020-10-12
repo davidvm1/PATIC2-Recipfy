@@ -55,12 +55,13 @@
 </template>
 <script>
 import rules from "@/libs/rules";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import firebaseService from "@/services/firebaseServices";
 export default {
   name: "Login",
   computed: {
     ...mapState(["isLogged"]),
+    ...mapGetters(["getUserId"])
   },
   data() {
     return {
@@ -73,24 +74,26 @@ export default {
   methods: {
     async pressed() {
       if (this.email && this.password) {
-        //Se puede iniciar sesión
         try {
           const user = await firebaseService.Sign(this.email, this.password);
+          this.$store.commit("SET_NEW_USER", user);
           this.$store.commit("CHANGE_SESSION_STATE", true);
-          //console.log("Si se loguea!!")
-          this.$router.replace({
-            name: "Search",
-          });
           if (!user || !user.user) {
             return;
           }
+          const recipesIds = await this.$store.dispatch('getUserRecipes',this.getUserId)
+          if (recipesIds) {
+            this.$store.commit('SET_USER_RECIPES', recipesIds.favRecipes)
+          }
+          await this.$router.replace({
+            name: "Search",
+          });
         } catch (err) {
           this.error = err;
         }
       }
     },
     async rememberPass() {
-      //Aqui se pone el metodo
       if (this.email) {
         try {
           const user = await firebaseService.rememberPass(this.email);

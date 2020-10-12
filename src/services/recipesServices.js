@@ -25,7 +25,6 @@ recipes.getRecipesByIngredients = async (ingredients) => {
 }
 //En este método se hace la obtención de la información de la receta por medio del id, se toma el parametro includeNutrition en false
 recipes.getRecipeById = async (recipeId) => {
-  let ingredientsQuery = ''
   try {
     const request = {
       method: 'GET',
@@ -34,6 +33,29 @@ recipes.getRecipeById = async (recipeId) => {
         includeNutrition: false
       },
       url: `https://api.spoonacular.com/recipes/${recipeId}/information`
+    }
+
+    const response = await axios(request)
+    return response.data
+  } catch (e) {
+    const message = e.response
+    if (!message) throw new Error(e.message)
+    else throw new Error(message.data.error)
+  }
+}
+recipes.getMultipleRecipesById = async (data) => {
+  let ids = ''
+  data.forEach(item => ids = ids + item + ',')
+  ids = ids.replace(/,$/,"")
+  try {
+    const request = {
+      method: 'GET',
+      params: {
+        apiKey: appKey,
+        includeNutrition: false,
+        ids: ids
+      },
+      url: `https://api.spoonacular.com/recipes/informationBulk`
     }
 
     const response = await axios(request)
