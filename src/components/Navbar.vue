@@ -3,7 +3,7 @@
     <v-app-bar
       color="#00575A"
       flat>
-      <v-app-bar-nav-icon color="white"  @click="drawer = true"/>
+      <v-app-bar-nav-icon color="white"  @click="drawer = true" v-if="isLogged"/>
 
       <v-toolbar-title>
         Recipfy
@@ -15,7 +15,7 @@
              color="white"
              text
              v-if="isLogged"
-             @click="logOut">Salir
+             @click="logOut">Log Out
       </v-btn>
 
       <v-container v-else>
@@ -24,7 +24,7 @@
                  color="white"
                  @click="$router.push({path: '/'})"
                  text>
-            Iniciar Sesión
+            Log In
           </v-btn>
 
           <span class="mr-4"
@@ -36,7 +36,7 @@
                  color="white"
                  @click="$router.push({path: '/Signup'})"
                  text>
-            Registrarse
+            Sign up
           </v-btn>
 
         </v-row>

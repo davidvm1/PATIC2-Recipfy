@@ -1,13 +1,13 @@
 <template>
   <v-card min-width="500" class="mx-auto mt-13 mb-13 pa-13">
-    <v-card-title class="title"> Iniciar Sesión </v-card-title>
+    <v-card-title class="title"> Log in </v-card-title>
     <v-form class="text-center" ref="SignInForm">
       <v-text-field
         append-icon="mdi-email-multiple-outline"
         outlined
         rounded
         type="email"
-        label="Correo electrónico"
+        label="Email"
         :rules="[rules.required, rules.email]"
         v-model="email"
         required
@@ -19,7 +19,7 @@
         outlined
         rounded
         name="input-10-2"
-        label="Contraseña"
+        label="Password"
         class="input-group--focused"
         type="password"
         :rules="[rules.required]"
@@ -29,7 +29,7 @@
       </v-text-field>
 
       <v-radio-group>
-        <v-radio color="#00575A" label="Recuerdame" value="radio-1"> </v-radio>
+        <v-radio color="#00575A" label="Remember me" value="radio-1"> </v-radio>
       </v-radio-group>
 
       <v-btn
@@ -40,11 +40,11 @@
         color="#00575A"
         @click="pressed"
       >
-        Ingresar
+        Log in
       </v-btn>
 
       <v-btn text color="#00575A" @click="rememberPass()">
-        ¿Olvidaste la contraseña?
+        Forgot Password?
       </v-btn>
 
       <v-alert class="mt-5" type="error" v-if="error">
@@ -98,7 +98,7 @@ export default {
         try {
           const user = await firebaseService.rememberPass(this.email);
           this.error =
-            "Acabamos de enviar un mensaje a tu correo electronico para que recuperes tu cuenta";
+            "We send recovery email, check it out";
           this.email = "";
           if (!user || !user.user) {
             return;
@@ -107,7 +107,7 @@ export default {
           this.error = err;
         }
       } else {
-        this.error = "Debes ingresar todos los campos";
+        this.error = "All fields are required";
       }
     }
   }
