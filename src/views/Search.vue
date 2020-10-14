@@ -7,7 +7,7 @@
       <v-combobox
         v-model="ingredients"
         :items="ingredients"
-        label="Ingresa tus ingredientes"
+        label="Add ingredients"
         clearable
         multiple
         chips
@@ -17,7 +17,7 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>
-                Presiona <kbd>enter</kbd> para agregar ingredientes
+                Press <kbd>enter</kbd> to add ingredients
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -29,7 +29,7 @@
       <v-btn class="ml-2"
              large
              @click="getRecipes">
-        Buscar
+        Search
       </v-btn>
     </v-row>
     <v-row>
@@ -102,4 +102,8 @@ export default {
 </script>
 
 <style>
+  .v-application .primary--text {
+    color: #00575A !important;
+    caret-color: #00575A !important;
+  }
 </style>

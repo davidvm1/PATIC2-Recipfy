@@ -4,11 +4,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-/*   {
-    path: '/',
+  {
+    path: '/home',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "home" / '../views/Home.vue')
-  }, */
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+  },
   {
     path: '/signup',
     name: 'Signup',
@@ -28,6 +28,11 @@ const routes = [
     path: '/recipe/:id',
     name: 'Recipe',
     component: () => import(/* webpackChunkName: "recipe" */ '../views/Recipe.vue')
+  },
+  {
+    path: '/favorites/:UserId',
+    name: 'favorites',
+    component: () => import(/* webpackChunkName: "recipe" */ '../views/Favorites.vue')
   },
 ]
 
