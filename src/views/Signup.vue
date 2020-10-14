@@ -111,7 +111,16 @@ export default {
       if (!this.$refs.SignInForm.validate()) return
       try {
         const user = await firebaseService.createUser(this.email, this.password)
+        const newUser = {
+          userId: user.user.uid,
+          name: this.name,
+          lastName: this.lastName
+        }
+        await firebaseService.addNewUserInstance(newUser)
+        this.$store.commit("SET_NEW_USER", user);
+        this.$store.commit('SET_USER_RECIPES', [])
         this.$store.commit('CHANGE_SESSION_STATE', true)
+        this.$store.commit('SET_USER_NAMES', newUser)
         if (!user || !user.user) {
           return
         }

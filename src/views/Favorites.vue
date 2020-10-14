@@ -12,7 +12,8 @@
           </v-avatar>
         </div>
           <v-card-title class="align-center justify-center text-center">{{user.user.email}}</v-card-title>
-          <v-card-subtitle class="mb-8">
+          <v-card-title class="align-center justify-center text-center">{{name}} {{lastName}}</v-card-title>
+          <v-card-subtitle>
             Medellin, Colombia
           </v-card-subtitle>
         <v-btn class="mt-8"
@@ -59,7 +60,7 @@
   export default {
     name:'favorites',
     computed: {
-      ...mapState(['user', 'userRecipes']),
+      ...mapState(['user', 'userRecipes', 'name', 'lastName']),
       ...mapGetters(['getUserId'])
     },
     data () {
@@ -68,7 +69,7 @@
       }
     },
     async created() {
-      if(this.userRecipes) {
+      if(this.userRecipes.length !== 0) {
         this.recipes = await recipesService.getMultipleRecipesById(this.userRecipes)
       }
     }

@@ -123,9 +123,7 @@ export default {
         recipe: this.recipeId
       }
       let newRecipes = [...this.userRecipes]
-      console.log(newRecipes)
       newRecipes.push(this.recipeId)
-      console.log(newRecipes)
       this.$store.commit('SET_USER_RECIPES', newRecipes)
       await this.$store.dispatch('addUserRecipe', data)
     },
@@ -136,9 +134,7 @@ export default {
         recipe: this.recipeId
       }
       let newRecipes = [...this.userRecipes]
-      console.log(newRecipes)
       newRecipes = newRecipes.filter(item => item !== this.recipeId)
-      console.log(newRecipes)
       this.$store.commit('SET_USER_RECIPES', newRecipes)
       await this.$store.dispatch('removeUserRecipe', data)
     }

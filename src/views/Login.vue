@@ -84,6 +84,7 @@ export default {
           const recipesIds = await this.$store.dispatch('getUserRecipes',this.getUserId)
           if (recipesIds) {
             this.$store.commit('SET_USER_RECIPES', recipesIds.favRecipes)
+            this.$store.commit('SET_USER_NAMES', recipesIds)
           }
           await this.$router.replace({
             name: "Search",

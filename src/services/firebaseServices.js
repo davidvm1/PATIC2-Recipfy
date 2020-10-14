@@ -73,16 +73,29 @@ firebaseService.addUserRecipe = async(data) => {
   }catch(err){
     throw new Error(err.message)
   }
-},
-  firebaseService.removeUserRecipe = async(data) => {
-    try{
-      await db.collection("users").doc(data.user).update({
-        favRecipes: firebase.firestore.FieldValue.arrayRemove(data.recipe)
-      })
-      return 'success'
-    }catch(err){
-      throw new Error(err.message)
-    }
+}
+firebaseService.removeUserRecipe = async(data) => {
+  try{
+    await db.collection("users").doc(data.user).update({
+      favRecipes: firebase.firestore.FieldValue.arrayRemove(data.recipe)
+    })
+    return 'success'
+  }catch(err){
+    throw new Error(err.message)
   }
+}
+firebaseService.addNewUserInstance = async(data) => {
+  try{
+    await db.collection('users').doc(data.userId).set({
+      favRecipes: [],
+      name: data.name,
+      lastName: data.lastName
+    }, { merge: true })
+    return 'success'
+  }catch(err){
+    throw new Error(err.message)
+  }
+}
+
 
 export default firebaseService

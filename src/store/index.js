@@ -10,7 +10,9 @@ export default new Vuex.Store({
     isLogged: false,
     recipes: [],
     user: {},
-    userRecipes: []
+    userRecipes: [],
+    name: '',
+    lastName: ''
   },
   mutations: {
     CHANGE_SESSION_STATE (state, value) {
@@ -24,6 +26,10 @@ export default new Vuex.Store({
     },
     SET_USER_RECIPES (state, value) {
       state.userRecipes = value
+    },
+    SET_USER_NAMES (state, value) {
+      state.name = value.name
+      state.lastName = value.lastName
     }
   },
   actions: {
