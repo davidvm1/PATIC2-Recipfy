@@ -13,7 +13,7 @@
         chips
         deletable-chips
         persistent-hint>
-        <template v-slot:no-data>
+        <template>
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>
@@ -37,8 +37,9 @@
               :key="index"
               cols ="4"
               class="mx-auto"
-              style="margin: 10px"
+              style="margin: 10px; position: relative"
               width="350"
+              height="365"
               >
         <v-img
           class="black--text align-end"
@@ -47,13 +48,19 @@
         </v-img>
         <v-card-title>{{item.title}}</v-card-title>
 
-        <v-card-actions>
+        <v-card-actions style="position: absolute; bottom: 5px">
           <v-btn
             color="#00575A"
             text
             @click="$router.push({path: `/Recipe/${item.id}`})">
             See Details
           </v-btn>
+          <div class="d-inline-flex mr-2" style="margin-left: 150px">
+            <v-icon color="red" class="mr-3">
+              mdi-heart
+            </v-icon>
+            <span>{{item.likes}}</span>
+          </div>
         </v-card-actions>
       </v-card>
     </v-row>
@@ -97,7 +104,7 @@ export default {
           this.error = e
       }
     }
-  },
+  }
 }
 </script>
 

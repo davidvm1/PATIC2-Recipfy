@@ -66,4 +66,23 @@ recipes.getMultipleRecipesById = async (data) => {
     else throw new Error(message.data.error)
   }
 }
+recipes.getRecipeSteps = async (recipeId) => {
+  try {
+    const request = {
+      method: "GET",
+      params: {
+        apiKey: appKey,
+        stepBreakDown: false,
+      },
+      url: `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions`,
+    }
+
+    const response = await axios(request);
+    return response.data;
+  } catch (err) {
+    const message = err.response;
+    if (!message) throw new Error(err.message);
+    else throw new Error(message.data.error);
+  }
+}
 export default recipes

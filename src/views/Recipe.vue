@@ -60,7 +60,7 @@
               <v-list-item-title class="space"
                                  dark
                                  style="text-transform: capitalize;">
-                {{ingredients.name}}
+                {{ingredients.original}}
               </v-list-item-title>
               <v-divider></v-divider>
             </v-list-item-content>
@@ -75,9 +75,9 @@
           Steps
         </v-card-title>
         <v-list shaped>
-          <v-list-item v-for="(ingredients, j) in ingredients" :key="j">
+          <v-list-item v-for="(step, j) in steps" :key="j">
             <v-list-item-content>
-              <v-list-item-title class="space" style="text-transform: capitalize;">{{ingredients.original}}</v-list-item-title>
+              <v-list-item-title class="space" style="text-transform: capitalize;">{{step.step}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -108,13 +108,20 @@ export default {
     item: 1,
     recipeId: '',
     infoRecipe:{},
-    ingredients:[]
+    ingredients:[],
+    steps: []
   }),
   methods:{
     async getRecipfyInfo() {
       this.recipeId = this.$route.params.id
-      this.infoRecipe = await recipesService.getRecipeById(this.recipeId)
-      this.ingredients = this.infoRecipe.extendedIngredients
+      const info = await recipesService.getRecipeById(this.recipeId)
+      this.infoRecipe = info
+      this.ingredients = [...info.extendedIngredients]
+    },
+    async getRecipeSteps () {
+      this.recipeId = this.$route.params.id
+      const fetchedSteps = await recipesService.getRecipeSteps(this.recipeId)
+      this.steps = [...fetchedSteps[0].steps]
     },
     async addFavRecipe() {
       this.active = true
@@ -141,6 +148,7 @@ export default {
   },
   created(){
     this.getRecipfyInfo()
+    this.getRecipeSteps()
     const isFav = this.userRecipes.find(item => this.recipeId === item)
     if (isFav) {
       this.active = true
